@@ -1,9 +1,24 @@
-# js-kata-starter
+# cqrs-example
 
-Starter project for kata (Node, TypeScript, Jest)
+```typescript
+// WriteModel
+type WriteModel = {
+  value: number;
+};
 
-## Getting started
+// WriteModel -> ReadModel synchronization
+const synchronize =
+  (value: number) =>
+  ({ count, sum }: ReadModel): ReadModel => ({
+    count: count + 1,
+    sum: sum + value,
+  });
 
-- **Fork**, then clone the repository
-- Install dependencies
-- Start developing (`npm test`)
+// ReadModel
+type ReadModel = {
+  count: number;
+  sum: number;
+};
+
+const computeAverage = ({ count, sum }: ReadModel): number => sum / count;
+```
